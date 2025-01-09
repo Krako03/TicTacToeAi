@@ -1,6 +1,6 @@
 package com.griddynamics;
 
-public class Board {
+public final class Board {
     private char winnerChar = '_';
     private int blanks = 9;
     private boolean xTurn = true;
@@ -15,11 +15,10 @@ public class Board {
     private Player xUser;
     private Player oUser;
 
-    public Board(){
-
+    public Board() {
     }
 
-    public void executeGame(){
+    public void executeGame() {
         printGrid();
         while (true) {
             int[] xInput = xUser.getInput();
@@ -73,12 +72,12 @@ public class Board {
         return grid[coordinateOne][coordinateTwo] == BLANK;
     }
 
-    public void setPlayers(Player playerOne, Player playerTwo) {
+    public void setPlayers(final Player playerOne, final Player playerTwo) {
         xUser = playerOne;
         oUser = playerTwo;
     }
 
-    private void printGrid(){
+    private void printGrid() {
         System.out.println("---------");
         for (int i = 0; i < 3; i++) {
             System.out.print("| ");
@@ -99,7 +98,7 @@ public class Board {
         return winnerChar;
     }
 
-    public boolean checkSquareBW(int coordinateOne, int coordinateTwo, boolean isBlocking) {
+    public boolean checkSquareBW(final int coordinateOne, final int coordinateTwo, final boolean isBlocking) {
         boolean flag;
         if (isAvailable(coordinateOne, coordinateTwo)) {
             if (isBlocking) {
@@ -118,7 +117,7 @@ public class Board {
         return flag;
     }
 
-    public boolean checkGame(){
+    public boolean checkGame() {
         boolean winner = true;
         char currentValue;
 

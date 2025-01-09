@@ -2,10 +2,10 @@ package com.griddynamics;
 
 import java.util.Random;
 
-public class EasyAi extends Player {
+public final class EasyAi extends Player {
     private final Board board;
 
-    public EasyAi(Board board){
+    public EasyAi(final Board board) {
         this.board = board;
     }
 

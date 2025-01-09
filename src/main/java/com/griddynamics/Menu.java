@@ -79,9 +79,9 @@ public class Menu {
         return command;
     }
 
-    public static void setGame(final String command, Board board) {
+    public static void setGame(final String command, final Board board) {
         switch (command) {
-            case "e" -> {}
+            case "e" -> { }
             case "suu" -> {
                 Player xPlayer = new User(board);
                 Player oPlayer = new User(board);

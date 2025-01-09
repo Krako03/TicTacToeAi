@@ -2,8 +2,7 @@ package com.griddynamics;
 
 public class Main {
 
-
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         String command;
         Board board = new Board();
 

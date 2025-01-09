@@ -2,10 +2,10 @@ package com.griddynamics;
 
 import java.util.Random;
 
-public class MediumAi extends Player{
+public final class MediumAi extends Player {
     private final Board board;
 
-    public MediumAi(Board board){
+    public MediumAi(final Board board) {
         this.board = board;
     }
 

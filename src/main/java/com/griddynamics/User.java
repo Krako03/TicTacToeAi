@@ -2,11 +2,11 @@ package com.griddynamics;
 
 import java.util.Scanner;
 
-public class User extends Player {
+public final class User extends Player {
     private final Scanner scanner = new Scanner(System.in);
     private final Board board;
 
-    public User(Board board){
+    public User(final Board board) {
         this.board = board;
     }
 
@@ -34,7 +34,7 @@ public class User extends Player {
 
                 coordinateOne--;
                 coordinateTwo--;
-                if (!board.isAvailable(coordinateOne,coordinateTwo)) {
+                if (!board.isAvailable(coordinateOne, coordinateTwo)) {
                     System.out.println("This cell is occupied! Choose another one!");
                     fail = true;
                 }
@@ -53,7 +53,7 @@ public class User extends Player {
         return new int[] {coordinateOne, coordinateTwo};
     }
 
-    public void finishScanner(){
+    public void finishScanner() {
         scanner.close();
     }
 }

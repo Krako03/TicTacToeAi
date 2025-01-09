@@ -1,9 +1,9 @@
 package com.griddynamics;
 
-public class HardAi extends Player{
+public final class HardAi extends Player {
     private final Board board;
 
-    public HardAi(Board board){
+    public HardAi(final Board board) {
         this.board = board;
     }
 
@@ -46,7 +46,7 @@ public class HardAi extends Player{
         return new int[] {coordinateOne, coordinateTwo};
     }
 
-    private int minimax(boolean isMaximizing) {
+    private int minimax(final boolean isMaximizing) {
         int score;
         if (board.checkGame()) {
             switch (board.getWinnerChar()) {
