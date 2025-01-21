@@ -1,9 +1,9 @@
 package com.griddynamics;
 
-public abstract class Player {
-    public abstract int[] getInput();
+public interface Player {
+    int[] getInput();
 
-    public int validateInput(final String coordinateToValidate) {
+    default int validateInput(final String coordinateToValidate) {
         final int coordinate;
         try {
             coordinate = Integer.parseInt(coordinateToValidate);

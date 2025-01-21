@@ -1,19 +1,26 @@
 package com.griddynamics;
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(final String[] args) {
         String command;
-        Board board = new Board();
+        final Scanner scanner = new Scanner(System.in);
+        final Board board = new Board();
+        final Menu menu = new Menu(scanner);
 
         while (true) {
-            command = Menu.getUserCommand();
+            command = menu.getUserCommand();
             if ("e".equals(command)) {
+                board.closeScanner();
                 break;
             }
-            Menu.setGame(command, board);
+            board.setGame(command);
             board.executeGame();
-            board = new Board();
+            board.restartGame();
         }
+
+        scanner.close();
     }
 }

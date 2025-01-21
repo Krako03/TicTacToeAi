@@ -2,12 +2,13 @@ package com.griddynamics;
 
 import java.util.Scanner;
 
-public final class User extends Player {
-    private final Scanner scanner = new Scanner(System.in);
+public final class User implements Player {
+    private final Scanner scanner;
     private final Board board;
 
-    public User(final Board board) {
+    public User(final Board board, Scanner scanner) {
         this.board = board;
+        this.scanner = scanner;
     }
 
     @Override
@@ -51,9 +52,5 @@ public final class User extends Player {
         } while (fail);
 
         return new int[] {coordinateOne, coordinateTwo};
-    }
-
-    public void finishScanner() {
-        scanner.close();
     }
 }

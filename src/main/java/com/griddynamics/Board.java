@@ -1,17 +1,21 @@
 package com.griddynamics;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public final class Board {
-    private char winnerChar = '_';
+    private char winnerChar = '\0';
     private int blanks = 9;
     private boolean xTurn = true;
+    private final Scanner scanner = new Scanner(System.in);
     private final char[][] grid = {
             {'_', '_', '_'},
             {'_', '_', '_'},
             {'_', '_', '_'}
     };
-    private final char BLANK = '_';
-    private final char CROSS = 'X';
-    private final char CIRCLE = 'O';
+    private final static char BLANK = '_';
+    private final static char CROSS = 'X';
+    private final static char CIRCLE = 'O';
     private Player xUser;
     private Player oUser;
 
@@ -20,15 +24,17 @@ public final class Board {
 
     public void executeGame() {
         printGrid();
+        int[] xInput;
+        int[] oInput;
         while (true) {
-            int[] xInput = xUser.getInput();
+            xInput = xUser.getInput();
             putSquare(xInput[0], xInput[1]);
             printGrid();
             if (checkGame()) {
                 printResult();
                 break;
             }
-            int[] oInput = oUser.getInput();
+            oInput = oUser.getInput();
             putSquare(oInput[0], oInput[1]);
             printGrid();
             if (checkGame()) {
@@ -99,17 +105,13 @@ public final class Board {
     }
 
     public boolean checkSquareBW(final int coordinateOne, final int coordinateTwo, final boolean isBlocking) {
-        boolean flag;
+        final boolean flag;
         if (isAvailable(coordinateOne, coordinateTwo)) {
             if (isBlocking) {
                 xTurn = !xTurn;
             }
             putSquare(coordinateOne, coordinateTwo);
-            if (checkGame()) {
-                flag = true;
-            } else {
-                flag = false;
-            }
+            flag = checkGame();
             putSquareBack(coordinateOne, coordinateTwo, isBlocking);
         } else {
             flag = false;
@@ -203,5 +205,47 @@ public final class Board {
 
     public boolean isxTurn() {
         return xTurn;
+    }
+
+    public char getCell(final int coordinateOne, final int coordinateTwo) {
+        return grid[coordinateOne][coordinateTwo];
+    }
+
+    public void restartGame() {
+        winnerChar = '\0';
+        blanks = 9;
+        xTurn = true;
+        Arrays.fill(grid[0], '_');
+        Arrays.fill(grid[1], '_');
+        Arrays.fill(grid[2], '_');
+    }
+
+    public void setGame(final String command) {
+        final Player xPlayer;
+        final Player oPlayer;
+
+        if (command.charAt(1) == 'u') xPlayer = new User(this, scanner);
+        else if (command.charAt(1) == 'e') xPlayer = new EasyAi(this);
+        else if (command.charAt(1) == 'm') xPlayer = new MediumAi(this);
+        else xPlayer = new HardAi(this);
+
+        if (command.charAt(2) == 'u') oPlayer = new User(this, scanner);
+        else if (command.charAt(2) == 'e') oPlayer = new EasyAi(this);
+        else if (command.charAt(2) == 'm') oPlayer = new MediumAi(this);
+        else oPlayer = new HardAi(this);
+
+        setPlayers(xPlayer, oPlayer);
+    }
+
+    public Player getXUser() {
+        return xUser;
+    }
+
+    public Player getOUser() {
+        return oUser;
+    }
+
+    public void closeScanner() {
+        scanner.close();
     }
 }

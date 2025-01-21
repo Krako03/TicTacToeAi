@@ -1,6 +1,6 @@
 package com.griddynamics;
 
-public final class HardAi extends Player {
+public final class HardAi implements Player {
     private final Board board;
 
     public HardAi(final Board board) {

@@ -1,18 +1,19 @@
 package com.griddynamics;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
-public final class EasyAi extends Player {
+public final class EasyAi implements Player {
     private final Board board;
+    private final SecureRandom random;
 
     public EasyAi(final Board board) {
         this.board = board;
+        this.random = new SecureRandom();
     }
 
     @Override
     public int[] getInput() {
         System.out.println("Making move level \"easy\"");
-        final Random random = new Random();
         int coordinateOne;
         int coordinateTwo;
         boolean fail;

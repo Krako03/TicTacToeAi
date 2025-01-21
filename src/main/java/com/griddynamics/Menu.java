@@ -2,15 +2,19 @@ package com.griddynamics;
 
 import java.util.Scanner;
 
-public class Menu {
-    private static final String EASY = "easy";
-    private static final String MEDIUM = "medium";
-    private static final String HARD = "hard";
-    private static final String USER = "user";
-    private static final String START = "start";
-    private static Scanner scanner = new Scanner(System.in);
+public final class Menu {
+    private final static String EASY = "easy";
+    private final static String MEDIUM = "medium";
+    private final static String HARD = "hard";
+    private final static String USER = "user";
+    private final static String START = "start";
+    private final Scanner scanner;
 
-    public static String getUserCommand() {
+    public Menu(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+    public String getUserCommand() {
         boolean fail;
         boolean hasThree = false;
         String input;
@@ -27,7 +31,7 @@ public class Menu {
             final String[] parameters = input.split(" ");
 
             if (parameters.length == 3) {
-                if ((START.equals(parameters[0])) && (EASY.equals(parameters[1])
+                if (START.equals(parameters[0]) && (EASY.equals(parameters[1])
                         || MEDIUM.equals(parameters[1]) || HARD.equals(parameters[1])
                         || USER.equals(parameters[1])) && (EASY.equals(parameters[2])
                         || MEDIUM.equals(parameters[2]) || HARD.equals(parameters[2])
@@ -77,92 +81,5 @@ public class Menu {
         }
 
         return command;
-    }
-
-    public static void setGame(final String command, final Board board) {
-        switch (command) {
-            case "e" -> { }
-            case "suu" -> {
-                Player xPlayer = new User(board);
-                Player oPlayer = new User(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "sue" -> {
-                Player xPlayer = new User(board);
-                Player oPlayer = new EasyAi(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "sum" -> {
-                Player xPlayer = new User(board);
-                Player oPlayer = new MediumAi(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "suh" -> {
-                Player xPlayer = new User(board);
-                Player oPlayer = new HardAi(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "seu" -> {
-                Player xPlayer = new EasyAi(board);
-                Player oPlayer = new User(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "smu" -> {
-                Player xPlayer = new MediumAi(board);
-                Player oPlayer = new User(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "shu" -> {
-                Player xPlayer = new HardAi(board);
-                Player oPlayer = new User(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "see" -> {
-                Player xPlayer = new EasyAi(board);
-                Player oPlayer = new EasyAi(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "sem" -> {
-                Player xPlayer = new EasyAi(board);
-                Player oPlayer = new MediumAi(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "seh" -> {
-                Player xPlayer = new EasyAi(board);
-                Player oPlayer = new HardAi(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "sme" -> {
-                Player xPlayer = new MediumAi(board);
-                Player oPlayer = new EasyAi(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "she" -> {
-                Player xPlayer = new HardAi(board);
-                Player oPlayer = new EasyAi(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "smm" -> {
-                Player xPlayer = new MediumAi(board);
-                Player oPlayer = new MediumAi(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "smh" -> {
-                Player xPlayer = new MediumAi(board);
-                Player oPlayer = new HardAi(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "shm" -> {
-                Player xPlayer = new HardAi(board);
-                Player oPlayer = new MediumAi(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            case "shh" -> {
-                Player xPlayer = new HardAi(board);
-                Player oPlayer = new HardAi(board);
-                board.setPlayers(xPlayer, oPlayer);
-            }
-            default -> System.out.println("Place a proper command!");
-        }
     }
 }
